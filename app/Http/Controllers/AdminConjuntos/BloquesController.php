@@ -7,21 +7,32 @@ use App\Http\Controllers\Controller;
 
 use App\Unidade;
 use App\Bloque;
+use App\User;
+use DB; 
 
 class BloquesController extends Controller
 {
     public function index()
     {
-    	$unidades = Unidade::all();
-    	$bloques = Bloque::all();
+    	//$unidades = Unidade::all();
+    	//$bloques = Bloque::all();
+        $unidades = Unidade::where('id_admin','=', Auth()->user()->id)->get();
+        $bloques = DB::table('bloques')
+                    ->join('unidades','unidades.id','=','bloques.id_unidad')
+                    ->join('users','users.id','=','unidades.id_admin')
+                    ->where('unidades.id_admin','=',auth()->user()->id)
+                    ->select('bloques.id','unidades.id as id_unidad','unidades.nombre as unidad','bloques.nombre as bloque')
+                    ->get();
+
     	//$usuario_actual = Auth::user();
     	//dd($usuario_actual);
+        //dd($bloques);
     	return view('adminc.bloques.index', compact('bloques','unidades'));
     }
 
-    public function create()
+    public function create()//Esta funcion no se usa porque el create esta en el index y pasa al store
     {
-    	$unidades = User::all();
+    	$unidades = Unidade::where('id_admin','=', Auth()->user()->id)->get();
     	//dd($unidades);
     	return view('adminc.bloques.create', compact('unidades'));
     }
@@ -46,7 +57,7 @@ class BloquesController extends Controller
 
     public function edit(Bloque $bloque)
     {     
-    	$unidades = Unidade::all();	//En tipo Admin conjunto ponerle where::admin_id==auth()->user()->id	
+    	$unidades = Unidade::where('id_admin','=', Auth()->user()->id)->get();	
     	return view('adminc.bloques.edit', compact('unidades','bloque'));
     }
 

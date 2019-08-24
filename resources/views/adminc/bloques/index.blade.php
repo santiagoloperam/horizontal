@@ -23,9 +23,9 @@
 	                  <th>
 	                  	UNIDAD
 	                  	<select name="unidades-select" class="form-control input-sm">
-	                  		@foreach($unidades as $unidad)
+	                  		@foreach($bloques as $bloque)
 			              		<option>Filtre por Unidad</option>
-			              		<option value="{{ $unidad->id }}">{{ $unidad->nombre }}</option>
+			              		<option value="{{ $bloque->id_unidad }}">{{ $bloque->unidad }}</option>
 		              		@endforeach
 		              	</select>
 	                  </th> 
@@ -37,15 +37,15 @@
                 	@foreach($bloques as $bloque)
 						<tr>
 							<td>{{ $bloque->id }}</td>
-							<td>{{ $bloque->nombre }}</td>
-							<td>{{ $bloque->unidad->nombre }}</td> 						
+							<td>{{ $bloque->bloque }}</td>
+							<td>{{ $bloque->unidad }}</td> 						
 							
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<a href="{{ route('admin.bloques.edit',$bloque) }}"  class="btn btn-xs btn-info" ><i class="fa fa-pencil"></i></a>
+								<a href="{{ route('adminc.bloques.edit',$bloque->id) }}"  class="btn btn-xs btn-info" ><i class="fa fa-pencil"></i></a>
 
 								{{--  <a href="{{ route('admin.unidads.delete',$unidad) }}" class="btn btn-xs btn-danger" onclick="return confirm('Está seguro de eliminar el registro?')"><i class="fa fa-times"></i></a> --}}
-								<form method="post" action="{{ route('admin.bloques.delete',$bloque) }}" class="pull-left">
+								<form method="post" action="{{ route('adminc.bloques.delete',$bloque->id) }}" class="pull-left">
 								    {!! csrf_field() !!} {{ method_field('DELETE') }}
 								    <div>
 								        <button type="submit" class="btn btn-warning btn btn-xs btn-info" onclick="return confirm('Está seguro de eliminar el registro?')"><i class="fa fa-times"></i></button>
@@ -90,8 +90,7 @@
 	  })
 	</script>
 	
-
-	<!-- Modal CREAR-->
+<!-- Modal CREAR-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
@@ -103,7 +102,7 @@
 	      
 	      <div class="modal-body">
 	        <div class="row">
-				<form method="POST" action="{{route('admin.bloques.store')}}">
+				<form method="POST" action="{{route('adminc.bloques.store')}}">
 					@csrf
 
 					<div class="col-md-8">
@@ -152,4 +151,5 @@
 	<!-- MODAL ACTUALIZAR -->
 	
 	{{-- FIN MODAL ACTUALIZAR--}}
+	
 @endpush

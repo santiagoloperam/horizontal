@@ -74,13 +74,13 @@ class UnidadesController extends Controller
 		$unidad->active = $request->get('active');
 		$unidad->save();
 
-		return back()->with('flash','La Unidad ha sido actualizada!');
+		return redirect()->route('admin.unidades.index')->with('flash','La Unidad ha sido actualizada!');
 
     }
 
     public function destroy(Unidade $unidad)
     {    
     	$unidad->delete(); 
-    	return redirect()->route('admin.unidades.index');
+    	return redirect()->route('admin.unidades.index')->with('flash','La Unidad ha sido Eliminada!');
     }
 }

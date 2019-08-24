@@ -7,7 +7,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\TipoUsuario;
-use App\Umodad;
+use App\Unidade;
+use App\Bloque;
 
 
 class User extends Authenticatable
@@ -47,5 +48,10 @@ class User extends Authenticatable
 
     public function unidad(){
         return $this->belongsTo(Unidad::class);
+    }
+
+    public function bloques()
+    {
+        return $this->hasManyThrough('Bloque', 'Unidade', 'id_admin', 'id_unidad');
     }
 }

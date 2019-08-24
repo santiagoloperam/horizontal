@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row">
-				<form method="POST" action="{{route('admin.bloques.update',$bloque)}}">
+				<form method="POST" action="{{route('adminc.bloques.update',$bloque->id)}}">
 					@csrf
 					{{ method_field('PUT') }}
 
@@ -13,13 +13,13 @@
 
 									<div class="form-group {{ $errors->has('nombre') ? 'has-error' : '' }}">
 										<label for="nombre" >Nombre del Bloque</label>
-										<input name="nombre" placeholder="Ingresa el nombre del bloque" type="text" class="form-control" value="{{ old('nombre', $bloque->nombre) }}">
+										<input name="nombre" placeholder="Ingresa el nombre del bloque" type="text" class="form-control" value="{{ old('nombre', $bloque->bloque) }}">
 										{!! $errors->first('nombre','<span class="help-block">:message</span>') !!}
 									</div>
 
 					              <div class="form-group {{ $errors->has('id_admin') ? 'has-error' : '' }}">
-					              	<label>Tipo de usuario</label>
-					              	<select name="id_admin" id="" class="form-control">
+					              	<label>Unidad</label>
+					              	<select name="id_unidad" id="" class="form-control">
 					              		<option value="">Selecciona la Unidad</option>
 					              		@foreach($unidades as $unidad)
 											<option value="{{ $unidad->id }}" {{ old('id_unidad', $bloque->id_unidad) == $unidad->id ? 'selected' : '' }} >

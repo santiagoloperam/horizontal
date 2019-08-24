@@ -4,7 +4,7 @@
 	<h1>UNIDADES</h1>
 
 	<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Crear Nueva Unidad</button>
-
+	
 	 <div class="box box-primary">
             <div class="box-header">
               <h3 class="box-title">Listado de Unidades</h3>
@@ -19,8 +19,8 @@
 	                  <th>DIRECCION</th>                
 	                  <th>TELÉFONO</th>                
 	                  <th>ADMINISTRADOR</th>                
-	                  <th>ACTIVO</th>  
-	                  <th>ACCIONES</th> 
+	                  <th>ACTIVO</th> 
+	                  <th>ACCIONES</th>
 	                </tr>
                 </thead>
                 
@@ -39,6 +39,7 @@
 									<i class="fa fa-times iconos">
 								@endif
 							</td>
+
 							<td>
 								&nbsp;&nbsp;&nbsp;
 								<a href="{{ route('admin.unidades.edit',$unidad) }}"  class="btn btn-xs btn-info" ><i class="fa fa-pencil"></i></a>
@@ -52,6 +53,7 @@
 								</form>
 								
 							</td>
+							
 						</tr>
                 	@endforeach                	
                 </tbody>
@@ -143,7 +145,6 @@
 								  <!-- Date -->
 					              <!-- <div class="form-group">
 					                <label>Fecha de publicación:</label>
-
 					                <div class="input-group date">
 					                  <div class="input-group-addon">
 					                    <i class="fa fa-calendar"></i>
@@ -197,8 +198,4 @@
 	  </div>
 	</div>
 	{{-- FIN MODAL CREAR --}}
-
-	<!-- MODAL ACTUALIZAR -->
-	
-	{{-- FIN MODAL ACTUALIZAR--}}
 @endpush
