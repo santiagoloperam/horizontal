@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('adminc.layout')
 
 @section('content')
 	<h1>USUARIOS</h1>
@@ -48,10 +48,10 @@
 							</td>
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<a href="{{ route('admin.users.edit',$user) }}"  class="btn btn-xs btn-info" ><i class="fa fa-pencil"></i></a> 
+								<a href="{{ route('adminc.users.edit',$user) }}"  class="btn btn-xs btn-info" ><i class="fa fa-pencil"></i></a> 
 
 								{{--  <a href="{{ route('admin.users.delete',$user) }}" class="btn btn-xs btn-danger" onclick="return confirm('Está seguro de eliminar el registro?')"><i class="fa fa-times"></i></a> --}}
-								<form method="post" action="{{ route('admin.users.delete',$user) }}" class="pull-left">
+								<form method="post" action="{{ route('adminc.users.delete',$user) }}" class="pull-left">
 								    {!! csrf_field() !!} {{ method_field('DELETE') }}
 								    <div>
 								        <button type="submit" class="btn btn-warning btn btn-xs btn-info" onclick="return confirm('Está seguro de eliminar el registro?')"><i class="fa fa-times"></i></button>
@@ -107,7 +107,7 @@
 	      
 	      <div class="modal-body">
 	        <div class="row">
-				<form method="POST" action="{{route('admin.users.store')}}">
+				<form method="POST" action="{{route('adminc.users.store')}}">
 					@csrf
 
 					<div class="col-md-8">
@@ -173,11 +173,8 @@
 					              	<label>Tipo de usuario</label>
 					              	<select name="tipo_usuario" id="" class="form-control">
 					              		<option value="">Selecciona un Rol</option>
-					              		@foreach($tipo_usuarios as $tipo)
-											<option value="{{ $tipo->id }}" {{ old('tipo_usuario') == $tipo->id ? 'selected' : '' }}>
-												{{ $tipo->tipo_usuarios }}
-											</option>
-					              		@endforeach
+					              		<option value=3>Propietario</option>
+					              		<option value=4>Arrendatario</option>				              		
 					              	</select>
 					              	{!! $errors->first('tipo_usuario','<span class="help-block">:message</span>') !!}
 					              </div>

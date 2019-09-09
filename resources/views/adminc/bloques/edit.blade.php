@@ -17,7 +17,7 @@
 										{!! $errors->first('nombre','<span class="help-block">:message</span>') !!}
 									</div>
 
-					              <div class="form-group {{ $errors->has('id_admin') ? 'has-error' : '' }}">
+					              <div class="form-group {{ $errors->has('id_unidad') ? 'has-error' : '' }}">
 					              	<label>Unidad</label>
 					              	<select name="id_unidad" id="" class="form-control">
 					              		<option value="">Selecciona la Unidad</option>

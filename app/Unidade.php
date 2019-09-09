@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\User;
 use App\Bloque;
+use App\Apto;
 
 class Unidade extends Model
 {
@@ -20,5 +21,10 @@ class Unidade extends Model
     public function bloques()
     {
        return $this->hasMany(Bloque::class);
+    }
+
+    public function aptos()
+    {
+       return $this->hasMany(Apto::class,'id_unidad');
     }
 }

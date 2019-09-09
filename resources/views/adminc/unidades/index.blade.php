@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('adminc.layout')
 
 @section('content')
 	<h1>UNIDADES</h1>

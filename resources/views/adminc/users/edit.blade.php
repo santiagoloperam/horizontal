@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row">
-				<form method="POST" action="{{route('admin.users.update',$user)}}">
+				<form method="POST" action="{{route('adminc.users.update',$user)}}">
 					@csrf
 					{{ method_field('PUT') }}
 
@@ -69,11 +69,8 @@
 					              	<label>Tipo de usuario</label>
 					              	<select name="tipo_usuario" id="" class="form-control">
 					              		<option value="">Selecciona un Rol</option>
-					              		@foreach($tipo_usuarios as $tipo)
-											<option value="{{ $tipo->id }}" {{ old('tipo_usuario', $user->tipo_usuario) == $tipo->id ? 'selected' : '' }} >
-												{{ $tipo->tipo_usuarios }}
-											</option>
-					              		@endforeach
+					              		<option value=3 {{ old('tipo_usuario', $user->tipo_usuario) == 3 ? 'selected' : '' }}>Propietario</option>
+					              		<option value=4 {{ old('tipo_usuario', $user->tipo_usuario) == 4 ? 'selected' : '' }}>Arrendatario</option>			              		
 					              	</select>
 					              	{!! $errors->first('tipo_usuario','<span class="help-block">:message</span>') !!}
 					              </div>

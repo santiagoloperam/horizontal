@@ -15,7 +15,7 @@
           </a>
           <ul class="treeview-menu">
 -->            
-            <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('admin.users.index') }}"><i class="fa fa-users"></i>Usuarios</a></li>            
+            <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('adminc.users.index') }}"><i class="fa fa-users"></i>Usuarios</a></li>            
 <!--          </ul>           
           
 
@@ -31,7 +31,7 @@
 
              <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('adminc.bloques.index') }}"><i class="fa fa-building"></i>Bloques/Interiores</a></li>
 
-            <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('adminc.users.index') }}"><i class="fa fa-list-ol"></i>Tipo Apatos/Casas</a></li>
+            <li {{ request()->is('adminc.tipoaptos.index') ? 'class=active' : ''}}><a href="{{ route('adminc.tipoaptos.index') }}"><i class="fa fa-list-ol"></i>Tipo Apatos/Casas</a></li>
 
             <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('adminc.bloques.index') }}"><i class="fa fa-home"></i>Aptos/Casas</a></li>
 

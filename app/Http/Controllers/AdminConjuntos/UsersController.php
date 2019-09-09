@@ -12,10 +12,11 @@ class UsersController extends Controller
 {
     public function index()
     {
-    	$users = User::all();
+    	$users = User::where('id_admin','=', auth()->user()->id)->get();
+    	//$users = User::all();
     	$tipo_usuarios = TipoUsuario::all();
     	//$usuario_actual = Auth::user();
-    	//dd($usuario_actual);
+    	//dd($users);
     	return view('adminc.users.index', compact('users','tipo_usuarios'));
     }
 
@@ -50,6 +51,8 @@ class UsersController extends Controller
 		$user->password = bcrypt($request->get('password'));
 		$user->tipo_usuario = $request->get('tipo_usuario');
 		$user->active = $request->get('active');
+		$user->id_admin = auth()->user()->id;
+		//dd($user);
 		$user->save();
 
 		return back()->with('flash','tu usuario ha sido creado!');
@@ -87,7 +90,7 @@ class UsersController extends Controller
 		$user->active = $request->get('active');
 		$user->save();
 
-		return back()->with('flash','tu usuario ha sido actualizado!');
+		return redirect()->route('adminc.users.index')->with('flash','tu usuario ha sido actualizado!');
 
     }
 

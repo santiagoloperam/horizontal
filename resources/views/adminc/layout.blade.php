@@ -95,11 +95,11 @@ desired effect
       <!-- Sidebar Menu -->
   
       @if(auth()->user()->tipo_usuario == 2)
-          @include('admin.partials.nav')
+          @include('adminc.partials.nav')
       @endif
 
       @if(auth()->user()->tipo_usuario == 1)
-          @include('admin.partials.nav_admin')
+          @include('adminc.partials.nav_admin')
       @endif
 
 

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\TipoUsuario;
 use App\Unidade;
 use App\Bloque;
+use App\User;
 
 
 class User extends Authenticatable
@@ -21,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','last_name', 'email','dni','telefono', 'password','active','tipo_usuario'
+        'name','last_name', 'email','dni','telefono', 'password','active','tipo_usuario','id_admin'
     ];
 
     /**
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function bloques()
     {
         return $this->hasManyThrough('Bloque', 'Unidade', 'id_admin', 'id_unidad');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo(User::class);
     }
 }

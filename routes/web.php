@@ -67,6 +67,21 @@ Route::group(['prefix' => 'adminc',
     Route::put('bloques/{bloque}','BloquesController@update')->name('adminc.bloques.update');
     Route::delete('bloques/{bloque}','BloquesController@destroy')->name('adminc.bloques.delete');
 
+    Route::get('tipoaptos','TipoAptosController@index')->name('adminc.tipoaptos.index');
+    Route::get('tipoaptos/crate','TipoAptosController@create')->name('adminc.tipoaptos.create');
+    Route::post('tipoaptos','TipoAptosController@store')->name('adminc.tipoaptos.store');
+    Route::get('tipoaptos/{tipo_apto}','TipoAptosController@edit')->name('adminc.tipoaptos.edit');
+    Route::put('tipoaptos/{tipo_apto}','TipoAptosController@update')->name('adminc.tipoaptos.update');
+    Route::delete('tipoaptos/{tipo_apto}','TipoAptosController@destroy')->name('adminc.tipoaptos.delete');
+
+    Route::get('aptos','AptosController@index')->name('adminc.aptos.index');
+    Route::get('aptos/crate','AptosController@create')->name('adminc.aptos.create');
+    Route::post('aptos','AptosController@store')->name('adminc.aptos.store');
+    Route::get('aptos/{apto}','AptosController@edit')->name('adminc.aptos.edit');
+    Route::put('aptos/{apto}','AptosController@update')->name('adminc.aptos.update');
+    Route::delete('aptos/{apto}','AptosController@destroy')->name('adminc.aptos.delete');
+
+
 });
 
 

@@ -1,51 +1,61 @@
 @extends('adminc.layout')
 
 @section('content')
-	<h1>BLOQUES</h1>
+	<h1>TIPO DE APARTAMENTOS/CASAS</h1>
 
-	<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Crear Nuevo Bloque/Interior</button>
+	<button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Crear Nuevo Tipo de Apto/Casa</button>
 
 	 <div class="box box-primary">
             <div class="box-header">
-              <h3 class="box-title">Listado de Bloques</h3>
+              <h3 class="box-title">Listado de tipos de aptos/casas</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
 
 				
-              <table id="bloques-table" class="table table-bordered table-striped">
+              <table id="tipo_aptos-table" class="table table-bordered table-striped">
 
-
-                <thead>                	
-	                <tr>
-	                  <th>ID</th>
-	                  <th>NOMBRE BLOQUE</th>
-	                  <th>
-	                  	UNIDAD
-	                  	<select name="unidades-select" class="form-control input-sm">
-	                  		@foreach($bloques as $bloque)
+				
+                <thead> 
+                	<th></th>
+                	<th></th>
+                	<th>
+                		<div class="col-lg-4">
+                			<select name="unidades-select" class="form-control input-sm">
+	                  		@foreach($unidades as $unidad)
 			              		<option>Filtre por Unidad</option>
-			              		<option value="{{ $bloque->id_unidad }}">{{ $bloque->unidad }}</option>
+			              		<option value="{{ $unidad->id_unidad }}">{{ $unidad->nombre }}</option>
 		              		@endforeach
 		              	</select>
-	                  </th> 
+                		</div>
+                	</th>               	
+	                <tr>
+	                  <th>ID</th>
+	                  <th>NOMBRE TIPO APTO</th>
+	                  <th>COBRO</th>
+	                  <th>VIGENCIA</th>
+	                  <th>METROS</th>
+	                  <th>UNIDAD</th> 
 	                  <th>ACCIONES</th> 
 	                </tr>
                 </thead>
                 
                 <tbody>
-                	@foreach($bloques as $bloque)
+                	@foreach($tipo_aptos as $tipo_apto)
 						<tr>
-							<td>{{ $bloque->id }}</td>
-							<td>{{ $bloque->bloque }}</td>
-							<td>{{ $bloque->unidad }}</td> 						
+							<td>{{ $tipo_apto->id }}</td>
+							<td>{{ $tipo_apto->tipo_apto }}</td>
+							<td>{{ $tipo_apto->cobro }}</td>
+							<td>{{ $tipo_apto->vigencia }}</td> 						
+							<td>{{ $tipo_apto->metros }}</td> 						
+							<td>{{ $tipo_apto->unidad }}</td> 						
 							
 							<td>
 								&nbsp;&nbsp;&nbsp;
-								<a href="{{ route('adminc.bloques.edit',$bloque->id) }}"  class="btn btn-xs btn-info" ><i class="fa fa-pencil"></i></a>
+								<a href="{{ route('adminc.tipoaptos.edit',$tipo_apto->id) }}"  class="btn btn-xs btn-info" ><i class="fa fa-pencil"></i></a>
 
 								{{--  <a href="{{ route('admin.unidads.delete',$unidad) }}" class="btn btn-xs btn-danger" onclick="return confirm('Está seguro de eliminar el registro?')"><i class="fa fa-times"></i></a> --}}
-								<form method="post" action="{{ route('adminc.bloques.delete',$bloque->id) }}" class="pull-left">
+								<form method="post" action="{{ route('adminc.tipoaptos.delete',$tipo_apto->id) }}" class="pull-left">
 								    {!! csrf_field() !!} {{ method_field('DELETE') }}
 								    <div>
 								        <button type="submit" class="btn btn-warning btn btn-xs btn-info" onclick="return confirm('Está seguro de eliminar el registro?')"><i class="fa fa-times"></i></button>
@@ -79,7 +89,7 @@
 	<script src="/adminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 	<script>
 	  $(function () {
-	    $('#bloques-table').DataTable()({
+	    $('#tipo_aptos-table').DataTable()({
 	      'paging'      : true,
 	      'lengthChange': false,
 	      'searching'   : false,
@@ -102,7 +112,7 @@
 	      
 	      <div class="modal-body">
 	        <div class="row">
-				<form method="POST" action="{{route('adminc.bloques.store')}}">
+				<form method="POST" action="{{route('adminc.tipoaptos.store')}}">
 					@csrf
 
 					<div class="col-md-8">
@@ -110,11 +120,30 @@
 							
 								<div class="box-body">
 
-									<div class="form-group {{ $errors->has('nombre') ? 'has-error' : '' }}">
-										<label for="nombre" >Nombre del Bloque/Interior/Manzana</label>
-										<input name="nombre" placeholder="Ingresa el nombre del bloque/interior" type="text" class="form-control" value="{{ old('nombre') }}">
-										{!! $errors->first('nombre','<span class="help-block">:message</span>') !!}
+									<div class="form-group {{ $errors->has('tipo_apto') ? 'has-error' : '' }}">
+										<label for="tipo_apto" >Tipo de Apartamento</label>
+										<input name="tipo_apto" placeholder="Ingresa el tipo de apto./casa" type="text" class="form-control" value="{{ old('tipo_apto') }}">
+										{!! $errors->first('tipo_apto','<span class="help-block">:message</span>') !!}
 									</div>
+
+									<div class="form-group {{ $errors->has('cobro') ? 'has-error' : '' }}">
+										<label for="cobro" >Cobro</label>
+										<input name="cobro" placeholder="Ingresa el cobro administrativo por periodo" type="text" class="form-control" value="{{ old('cobro') }}">
+										{!! $errors->first('cobro','<span class="help-block">:message</span>') !!}
+									</div>
+
+									<div class="form-group {{ $errors->has('vigencia') ? 'has-error' : '' }}">
+										<label for="vigencia" >Vigencia de cobro en dias</label>
+										<input name="vigencia" placeholder="Ingresa la vigencia en dias del cobro de admon." type="text" class="form-control" value="{{ old('vigencia') }}">
+										{!! $errors->first('vigencia','<span class="help-block">:message</span>') !!}
+									</div>
+
+									<div class="form-group {{ $errors->has('metros') ? 'has-error' : '' }}">
+										<label for="metros" >Metros cuadrados del apto. o casa </label>
+										<input name="metros" placeholder="Ingresa la m2 del apto. o casa" type="text" class="form-control" value="{{ old('metros') }}">
+										{!! $errors->first('metros','<span class="help-block">:message</span>') !!}
+									</div>
+
 
 					              <div class="form-group {{ $errors->has('id_unidad') ? 'has-error' : '' }}">
 					              	<label>Unidad</label>
