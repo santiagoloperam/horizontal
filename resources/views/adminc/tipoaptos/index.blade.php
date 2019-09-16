@@ -17,18 +17,18 @@
 
 				
                 <thead> 
-                	<th></th>
-                	<th></th>
-                	<th>
-                		<div class="col-lg-4">
+                	<tr>
+                		<th></th>
+                		<th></th>
+                		<th>
                 			<select name="unidades-select" class="form-control input-sm">
-	                  		@foreach($unidades as $unidad)
-			              		<option>Filtre por Unidad</option>
-			              		<option value="{{ $unidad->id_unidad }}">{{ $unidad->nombre }}</option>
-		              		@endforeach
-		              	</select>
-                		</div>
-                	</th>               	
+		                  		@foreach($unidades as $unidad)
+				              		<option>Filtre por Unidad</option>
+				              		<option value="{{ $unidad->id }}">{{ $unidad->nombre }}</option>
+			              		@endforeach
+		              		</select>
+                		</th>
+                	</tr>               	
 	                <tr>
 	                  <th>ID</th>
 	                  <th>NOMBRE TIPO APTO</th>

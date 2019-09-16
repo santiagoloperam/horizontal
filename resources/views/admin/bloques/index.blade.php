@@ -16,19 +16,23 @@
               <table id="bloques-table" class="table table-bordered table-striped">
 
 
-                <thead>                	
+                <thead> 
+                	<tr>
+                		<th></th>
+                		<th></th>
+                		<th>
+                			<select name="unidades-select" class="form-control input-sm">
+		                  		@foreach($unidades as $unidad)
+				              		<option>Filtre por Unidad</option>
+				              		<option value="{{ $unidad->id }}">{{ $unidad->nombre }}</option>
+			              		@endforeach
+		              		</select>
+                		</th>
+                	</tr>                	
 	                <tr>
 	                  <th>ID</th>
 	                  <th>NOMBRE BLOQUE</th>
-	                  <th>
-	                  	UNIDAD
-	                  	<select name="unidades-select" class="form-control input-sm">
-	                  		@foreach($unidades as $unidad)
-			              		<option>Filtre por Unidad</option>
-			              		<option value="{{ $unidad->id }}">{{ $unidad->nombre }}</option>
-		              		@endforeach
-		              	</select>
-	                  </th> 
+	                  <th>UNIDAD</th> 
 	                  <th>ACCIONES</th> 
 	                </tr>
                 </thead>

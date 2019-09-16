@@ -82,7 +82,36 @@ Route::group(['prefix' => 'adminc',
     Route::delete('aptos/{apto}','AptosController@destroy')->name('adminc.aptos.delete');
 
 
+    //FACTURACION
+
+    Route::get('facturas','FacturasController@index')->name('adminc.facturas.index');
+    Route::get('facturas/crate','FacturasController@create')->name('adminc.facturas.create');
+    Route::post('facturas','FacturasController@store')->name('adminc.facturas.store');
+    Route::get('facturas/{factura}','FacturasController@edit')->name('adminc.facturas.edit');
+    Route::put('facturas/{factura}','FacturasController@update')->name('adminc.facturas.update');
+    Route::delete('facturas/{factura}','FacturasController@destroy')->name('adminc.facturas.delete');
+
+    //AJAX
+    
+    Route::get('unidad/{id}/bloques',function($id){
+    // dd($id);
+    $bloques = \App\Bloque::where('id_unidad','=',$id)->get();
+    $tipoaptos = \App\TipoApto::where('id_unidad','=',$id)->get();
+    $data[0] = $bloques;
+    $data[1] = $tipoaptos;
+    return response([ 'data' => $data ], 200);
+    });
+
+     Route::get('unidad/{id}/aptos',function($id){
+      //dd($id);     
+     $aptos = \App\Apto::where('id_unidad','=',$id)->get();
+     $data = $aptos;
+     return response([ 'data' => $data ], 200);
+     });
+
+
 });
+
 
 
 

@@ -21,10 +21,10 @@
                 		<th></th>
                 		<th></th>
                 		<th>
-                			<select name="unidades-select" class="form-control input-sm">
-		                  		@foreach($bloques as $bloque)
+                			<select name="unidades-select" class="form-control input-sm" id="filtro_uni">
+		                  		@foreach($unidades as $unidad)
 				              		<option>Filtre por Unidad</option>
-				              		<option value="{{ $bloque->id_unidad }}">{{ $bloque->unidad }}</option>
+				              		<option value="{{ $unidad->id }}">{{ $unidad->nombre }}</option>
 			              		@endforeach
 		              		</select>
                 		</th>
@@ -41,7 +41,7 @@
 	                </tr>
                 </thead>
                 
-                <tbody>
+                <tbody id="tableaptos">
                 	@foreach($aptos as $apto)
 						<tr>
 							<td>{{ $apto->id }}</td>
@@ -63,8 +63,7 @@
 								    <div>
 								        <button type="submit" class="btn btn-warning btn btn-xs btn-info" onclick="return confirm('Está seguro de eliminar el registro?')"><i class="fa fa-times"></i></button>
 								    </div>                
-								</form>
-								
+								</form>								
 							</td>
 						</tr>
                 	@endforeach                	
@@ -102,6 +101,60 @@
 	    })
 	  })
 	</script>
+
+	<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			const unidad = $('#id_unidad');
+			const selectBloque = $('#id_bloque');
+			const selectTipoApto = $('#tipoapto');
+
+			const selectFiltroUni = $('#filtro_uni');
+			const tableAptos = $('#tableaptos');
+
+
+			unidad.on('change', function(e) {
+
+				fetch(`/adminc/unidad/${unidad.val()}/bloques`).then(res => res.json()).then(({ data }) => {
+					const uneOption = selectBloque[0].options[0];
+					const uneOption1 = selectTipoApto[0].options[0];
+
+					selectBloque.empty();
+					selectBloque.append(uneOption);
+
+					selectTipoApto.empty();
+					selectTipoApto.append(uneOption1);
+
+					data[0].forEach((item, index) => {
+						const $option = $('<option>');
+
+						$option.text(item.nombre);
+						$option.attr('id', item.id);
+
+						selectBloque.append($option);
+					});
+
+					data[1].forEach((item, index) => {
+						const $option = $('<option>');
+
+						$option.text(item.tipo_apto);
+						$option.attr('id', item.id);
+
+						selectTipoApto.append($option);
+					});
+				});				
+			});
+
+
+			//FILTRO POR UNIDAD
+
+
+
+		});	
+		
+	</script>
+
+
+
 	
 <!-- Modal CREAR-->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -131,7 +184,7 @@
 
 					              <div class="form-group {{ $errors->has('id_unidad') ? 'has-error' : '' }}">
 					              	<label>Unidad</label>
-					              	<select name="id_unidad" id="" class="form-control">
+					              	<select name="id_unidad" id="id_unidad" class="form-control">
 					              		<option value="">Seleccione la Unidad a la que pertenece</option>
 					              		@foreach($unidades as $unidad)
 											<option value="{{ $unidad->id }}" {{ old('id_unidad') == $unidad->id ? 'selected' : '' }}>
@@ -144,27 +197,17 @@
 								
 								<div class="form-group {{ $errors->has('id_bloque') ? 'has-error' : '' }}">
 					              	<label>Bloque</label>
-					              	<select name="id_bloque" id="" class="form-control">
-					              		<option value="">Seleccione el bloque al que pertenece</option>
-					              		@foreach($bloques as $bloque)
-											<option value="{{ $bloque->id }}" {{ old('id_bloque') == $bloque->id ? 'selected' : '' }}>
-												{{ $bloque->bloque }} 
-											</option>
-					              		@endforeach
+					              	<select name="id_bloque" id="id_bloque" class="form-control">
+					              		<option value="">Seleccione el bloque al que pertenece</option>   		
 					              	</select>
 					              	{!! $errors->first('id_bloque','<span class="help-block">:message</span>') !!}
 					              </div>
 
 					              <div class="form-group {{ $errors->has('id_tipo_apto') ? 'has-error' : '' }}">
 					              	<label>Tipo de Apto/Casa</label>
-					              	<select name="id_tipo_apto" id="" class="form-control">
+					              	<select name="id_tipo_apto" id="tipoapto" class="form-control">
 					              		<option value="">Seleccione el tipo de apto./casa</option>
-					              		@foreach($tipoaptos as $tipoapto)
-											<option value="{{ $tipoapto->id }}" {{ old('id_tipo_apto') == $tipoapto->id ? 'selected' : '' }}>
-												{{ $tipoapto->tipo_apto }} 
-											</option>
-					              		@endforeach
-					              	</select>
+				              		</select>
 					              	{!! $errors->first('id_tipo_apto','<span class="help-block">:message</span>') !!}
 					              </div>
 
@@ -217,5 +260,6 @@
 	<!-- MODAL ACTUALIZAR -->
 	
 	{{-- FIN MODAL ACTUALIZAR--}}
+	
 	
 @endpush

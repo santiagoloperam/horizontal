@@ -126,4 +126,6 @@ class AptosController extends Controller
     	$apto->delete(); 
     	return redirect()->route('adminc.aptos.index')->with('flash','Apartamento/casa eliminado!');
     }
+
+    
 }

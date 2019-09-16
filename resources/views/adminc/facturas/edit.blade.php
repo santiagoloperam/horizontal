@@ -1,4 +1,4 @@
-@extends('adminc.layout')
+@extends('admin.layout')
 
 @section('content')
 	<div class="row">
@@ -19,7 +19,7 @@
 
 					              <div class="form-group {{ $errors->has('id_admin') ? 'has-error' : '' }}">
 					              	<label>Unidad</label>
-					              	<select name="id_unidad" id="id_unidad" class="form-control">
+					              	<select name="id_unidad" id="" class="form-control">
 					              		<option value="">Selecciona la Unidad a la que pertenece</option>
 					              		@foreach($unidades as $unidad)
 											<option value="{{ $unidad->id }}" {{ old('id_unidad', $apto->id_unidad) == $unidad->id ? 'selected' : '' }} >
@@ -32,7 +32,7 @@
 
 					              <div class="form-group {{ $errors->has('id_bloque') ? 'has-error' : '' }}">
 					              	<label>Bloque</label>
-					              	<select name="id_bloque" id="id_bloque" class="form-control">
+					              	<select name="id_bloque" id="" class="form-control">
 					              		<option value="">Seleccione el bloque al que pertenece</option>
 					              		@foreach($bloques as $bloque)
 											<option value="{{ $bloque->id }}" {{ old('id_bloque', $apto->id_bloque) == $bloque->id ? 'selected' : '' }}>
@@ -45,7 +45,7 @@
 
 					              <div class="form-group {{ $errors->has('id_tipo_apto') ? 'has-error' : '' }}">
 					              	<label>Tipo de Apto/Casa</label>
-					              	<select name="id_tipo_apto" id="tipoapto" class="form-control">
+					              	<select name="id_tipo_apto" id="" class="form-control">
 					              		<option value="">Seleccione el tipo de apto./casa</option>
 					              		@foreach($tipoaptos as $tipoapto)
 											<option value="{{ $tipoapto->id }}" {{ old('id_tipo_apto', $apto->id_tipo_apto) == $tipoapto->id ? 'selected' : '' }}>
@@ -99,48 +99,4 @@
 		  </div>
 				
 			
-@stop
-
-@push('scripts')
-	<script>
-		window.addEventListener('DOMContentLoaded', function() {
-			const unidad = $('#id_unidad');
-			const selectBloque = $('#id_bloque');
-			const selectTipoApto = $('#tipoapto');
-
-			unidad.on('change', function(e) {
-
-				fetch(`/adminc/unidad/${unidad.val()}/bloques`).then(res => res.json()).then(({ data }) => {
-					const uneOption = selectBloque[0].options[0];
-					const uneOption1 = selectTipoApto[0].options[0];
-
-					selectBloque.empty();
-					selectBloque.append(uneOption);
-
-					selectTipoApto.empty();
-					selectTipoApto.append(uneOption1);
-
-					data[0].forEach((item, index) => {
-						const $option = $('<option>');
-
-						$option.text(item.nombre);
-						$option.attr('id', item.id);
-
-						selectBloque.append($option);
-					});
-
-					data[1].forEach((item, index) => {
-						const $option = $('<option>');
-
-						$option.text(item.tipo_apto);
-						$option.attr('id', item.id);
-
-						selectTipoApto.append($option);
-					});
-				});				
-			});
-		});	
-		
-	</script>
-@endpush
-
+@endsection

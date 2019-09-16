@@ -29,7 +29,7 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            
+            <li {{ request()->is('adminc.facturas.index') ? 'class=active' : ''}}><a href="{{ route('adminc.facturas.index') }}"><i class="fa fa-bill"></i>Facturas</a></li> 
             <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('adminc.users.index') }}"><i class="fa fa-calendar-week"></i>Tipo de Pago</a></li> 
             <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('adminc.users.index') }}"><i class="fa fa-credit-card"></i>Forma de Pago</a></li>
             <li {{ request()->is('adminc.users.index') ? 'class=active' : ''}}><a href="{{ route('adminc.users.index') }}"><i class="fa fa-money-bill-wave"></i>Cobros</a></li>             
